@@ -1,0 +1,20 @@
+Dada la similitud entre el problema de Independent Set (IS) y Path Selection (PS), puedo probar que PS es NP-Completo realizando una reducción de IS a PS, es decir, resolver IS realizando una transformación polinómica y luego utilizando un algoritmo que resuelva PS.
+
+Transformación:
+	Dado un grafo no dirigido G = (V, E) y un entero K, costruyo un grafo dirigido G' = (V', E') de la siguiente forma:
+	* Por cada arista (v1, v2) existente en el grafo original, agrego un vértice en G'.
+	* Conecto entre si todos los vértices de G' (para ambos lados).
+	* Por cada vértice vi, de G y grado > 0, creo un camino que recorra todas las aristas en las que vi tiene incidencia. Como estas aristas son vértices interconectados en G', es un camino válido.
+
+	De esta forma, realizo un llamado al algoritmo que resuelve PS con G', K'= K - cant. de vértices de grado 0 y los caminos creados como parámetros. Finalmente, podré conocer si existe un IS de, al menos, K vértices.
+
+Esta última afirmación debo demostrarla, es decir, demostrar que la reducción es correcta. Por lo tanto, voy a probar la siguiente doble implicancia:
+	Hay IS <=> Hay PS
+
+Hay PS -> hay IS:
+	Dado que cada camino representa las aristas en las que tiene incidencia un vértice, no será posible la existencia de dos, o más, caminos pertenecientes a vértices adyacentes. Esto se debe a que comparten una arista y, como PS no selecciona dos veces un mismo nodo (representaciones de una arista), es imposible que se seleccionen los caminos de ambos. Por lo tanto, la existencia de PS, de al menos K - cant. de vértices de grado 0, implica la existencia de IS de, al menos, K vértices. En PS los vértices de grado 0 representarían caminos vacíos (lo cuál no es válido) pero como estos, por naturaleza, son independientes, se los puede agregar directamente a la solución de IS.
+
+Hay IS -> hay PS:
+	La existencia de un IS indica que en este no se hace presente ninguna pareja de vértices adyacentes, es decir, no comparten aristas. Como en G' los vértices representan aristas de G, la existencia de un IS implica que al menos, "K - cant. de vértices de grado 0" caminos serán disjuntos y, por lo tanto, habrá un PS de este tamaño.
+		
+

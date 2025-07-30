@@ -1,0 +1,18 @@
+Para probar que Dominating Set es NP-Completo reduzco Vertex Cover a Dominating Set.
+
+Para la reducción realizo:
+	* Creo un nuevo grafo G' con los mismos vértices y aristas que el original.
+	* Por cada arista, creo un nuevo vértice y lo conecto con ambos extremos de la arista.
+	* Utilizo el algoritmo de Dominating Set enviando G' y K como parámetros.
+
+Ahora debo demostrar la doble implicancia:
+	Hay Vertex Cover <-> Hay Dominating Set
+
+Si hay Vertex Cover -> hay Dominating Set:
+	La existencia de un VC quiere decir que por cada arista del grafo original al menos uno de sus extremos está en el set. Como esto pasa con todas las aristas y en G' los nuevos vértices se conectan con los vértices para los cuáles hay VC, implica que necesariamente tiene que haber un DS. De no haberlo, estaríamos diciendo que algún vértice no tiene ningún adyacente (ni se encluentra incluido el mismo) en el set. Esto haría que en el grafo original no hubiera una arista cubierta y, por lo tanto, llegaríamos a una contradicción.
+
+Si hay Dominating Set -> hay Vertex Cover:
+	La presencia de un DS implica que, a lo sumo, K vértices hacen que todos los vértices del grafo esten en el subconjunto en cuestión o sean adyacentes a uno en el. Debido a la transformación realizada, podría haber vértices en este set que no existan en el grafo original. Esto no es un problema, podrían ceder su presencia a cualquiera de sus dos adyacentes y, como todos están conectados entre si, la dominancia se mantendría.
+	De esta forma, como cada vértice intermedio "inventado" va a estar dominado, en el grafo original esto se representaría como que la arista original está cubierta. En consecuencia, como todas las aristas van a estar cubiertas, el set representa la existencia de un Vertex Cover.
+
+En consecuencia, pude demostrar que Vertex Cover <= Dominating Set. Entonces Dominating Set es, al menos, tan difícil como Vertex Cover y como Vertex Cover es NP-Completo, Dominating Set también resulta ser NP-Completo.

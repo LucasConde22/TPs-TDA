@@ -1,0 +1,40 @@
+Algoritmo propuesto:
+
+* Ordeno descedentemente.
+* Asigno a la máquina con menor tiempo acumulado, arrancando por las rápidas y sumando, en estas, las longitudes por la mitad.
+
+Ejemplo:
+10 5 1 3 6 | Maq. 1 (lenta) y Maq. 2 (rápida)
+
+S:
+10 6 5 3 1
+Maq. 2: 10/2 + 5/2 + 1/2 = 5 + 2,5 + 0,5 = 8
+Maq. 1: 6 + 3 = 9
+
+S*:
+Maq. 2: 10/2 + 6/2 + 1/2 = 5, 3, 0,5 = 8,5
+Maq. 1: 5 + 3 = 8
+
+En este caso, S es 1,0588 veces la solución óptima S*.
+
+La solución óptima, S*, tiene cotas inferiores de:
+	S* >= sum(tj) / (m + 2k) --> La sumatoria de todos los trabajos dividido la sumatoria de máquinas que funcionan en tiempo normal y en tiempo doble.
+	S* >= max(tj) / 2 --> El tiempo que puede tomar realizar la tarea más larga.
+
+Si Ti es el tiempo total de una solución S (la máquina con mayor trabajo), Ti - tj (la última tarea asignada) era el mejor tiempo antes de que llegue tj. Por lo tanto, para cualquier máquina Tk, Tk >= Ti - tj.
+
+Sumando todos los tiempo de las máquinas,
+	sum(Tk) >= (m + 2k) * (Ti - tj)
+entonces,
+	sum(Tk) / (m + 2k) >= Ti - tj
+	
+Y, en consecuencia,
+	S* >= Ti - tj (Porque sum(Tk) / (m + 2k) <= sum(tj) / (m + 2k) <= S*)
+	S* + tj >= Ti
+	S* + 2S* >= Ti (Porque S* es >= al máximo tj/2, como demostré anteriormente)
+	3S* >= Ti
+	3S* >= S
+
+	De esta forma queda demostrado que la aproximación propuesta es, en el peor de los casos, una 3-Aproximación. Sin embargo, gracias al ordenamiento inicial, es posible que puedan adecuarse algunas cotas y demostrar que la aproximación es aún mejor (tal como vimos en clase con el problema de balanceo de cargas).
+
+

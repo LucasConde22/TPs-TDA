@@ -1,0 +1,30 @@
+Para demostrar que el problema de Subgrafo Isomórfico (SI) es un problema NP-Completo voy a realizar dos cosas:
+	I. Demostrar que está en NP, desarrollando un validador que permita verificar si una solución dada para un grafo específico es correcta.
+	II. Reducir polinomialmente un problema NP-Completo conocido a SI.
+
+I.
+	Codigo...
+Conclusión:
+	SI pertenece a NP.
+
+II. Reduzco K-Clique (KC) polinomialmente a SI.
+
+Problemas de decisión:
+	KC: Dado un grafo y un número entero K, determinar si existe un subconjunto de, al menos, K vértices del grafo tal que todos se conecten con todos. Es decir, generen un subgrafo completo de tamaño K (o mayor).
+	SI: Dados dos grafos, G1 y G2, determinar si existe un subgrafo de G1 que sea isomorfo a G2 (es decir, que sean "equivalentes").
+
+	Pasos de la reducción:
+	* Recibo un grafo y un número entero K.
+	* Creo un grafo que sea K-Clique, es decir que tenga K vértices conectados entre si.
+	* Llamo al algoritmo resolvedor de SI con G1 = grafo original y G2 = K-Clique generado.
+	* Hipótesis: Si SI encuentra solución, puedo determinar que KC tiene solución.
+
+Demostración de "Existe KC si y solo si existe SI de un K-Clique":
+
+Si existe SI, existe KC:
+	Si existe un subgrafo que sea isomorfo a un K-Clique en el grafo original, implica que necesariamente debe existir un subconjunto de, al menos, K vértices tales que todos estén conectados con todos en el grafo original y por ende, hay KC. De no ser así significaría que el SI encontrado no es válido, puesto que implicaría la inexistencia de una relación 1 a 1 entre las aristas (y vértices) de G2 y del SI encontrado.
+
+Si existe KC, existe SI:
+	Si existe un subconjunto de vértices K-Clique en el grafo original, al crear un nuevo grafo K-Clique, este deberá ser "equivalente" al subconjunto K-Clique formado anteriormente. Por lo tanto, será un SI.
+
+En conclusión, queda demostrado que la hipótesis es correcta y, por lo tanto, se puede afirmar que SI se trata de un problema NP-Completo.

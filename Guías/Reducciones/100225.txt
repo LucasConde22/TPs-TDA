@@ -1,0 +1,27 @@
+	Para demostrar que Hamiltonian Completion (HC) es un problema NP-Completo y sabiendo que Ciclo Hamiltoniano (CH) es un problema NP-Completo, puedo reducir este último a HC y, junto a la demostración de que HC pertenece a NP, podré confirmar que efectivamente se trata de un problema NP-Completo.
+
+	Comienzo que HC pertenece a NP desarrollando un validador que, dado un grafo G (original), un número K, un grafo G' (G + k aristas) y un ciclo hamiltoneano perteneciente a G', me permita determinar si una solución es correcta, o no.
+
+CÓDIGO...
+
+	Ahora que ya sé que el problema de HC pertenece a NP, prosigo con la reducción de CH a HC. Para esta, dado que CH es un "subproblema" de HC en el que K = 0, es decir, no se agrega ninguna arista, simplemente voy a utilizar el algoritmo enviando como parámetros un grafo G (sobre el cuál deseo saber si existe un CH) y K = 0. De esta manera, podré resolver el problema de CH utilizando un resolvedor de HC.
+
+	Finalmente, para confirmar que HC es NP-Completo, debo realizar una demostración de que la reducción recién aplicada es correcta, es decir, "Hay CH si y solo si hay HC con K = 0".
+
+Para esto, demuestro la doble implicancia:
+	Hay CH -> hay HC con K = 0,
+	Esta es muy directa, si ya sé que existe un ciclo hamiltoniano dentro de un grafo, el algortimo resolvedor de hamiltonian completition, al no tener que agregar ninguna arista extra, encontrará este mismo ciclo (u otro, de haberlo, pero la solución existirá). En cambio, si no hay ciclo hamiltoniano, sería absurdo que HC encuentre un ciclo, puesto que al no agregar ninguna arista, simplemente busca un CH en el grafo original.
+
+	Hay HC con K = 0, hay CH,
+	Si hay HC con K = 0 significa que se encontró un camino hamiltoniano en el grafo original, puesto que si K = 0, no fue necesario realizar ninguna modificación. Por lo tanto, la implicancia es correcta.
+
+	De esta forma, queda demostrada la reducción y es correcto confirmar que Hamiltonian Completion se trata de un problema NP-Completo.
+
+
+
+
+
+
+
+
+

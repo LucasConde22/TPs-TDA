@@ -1,0 +1,49 @@
+a)
+Catálogo:
+	1 10
+
+D:
+	10
+
+Selección:
+	S = 1
+	S* = 10
+
+	La solución obtenida es 1/10 veces la solución óptima.
+
+
+b)
+Catálogo:
+	5,0001 5 5
+
+D:
+	10
+
+Selección:
+	S = 5,0001 = 5,0001
+	S* = 5 + 5 = 10
+
+	La solución consiste en ordenar todos los productos descendentemente e ir seleccionando los que no generen que el valor acumulado supere el valor D. En el peor de los casos, la solución obtenida es 1/2 veces la solución óptima. Esto se debe a que, en una posición "inicial" podría aparecer un producto, como en el ejemplo, que anule siguientes productos cuya sumatoria es a lo sumo el doble de la obtenida.
+	En el ejemplo se puede apreciar que si el primer elemento fuese 5, el algoritmo encontraría una solución óptima.
+	Esto se puede demostrar con más formalidad como sigue:
+
+I. Se tiene un valor acumulado N.
+II. Aparece un producto con valor K.
+III. Si agregando este producto superamos el valor de D significa que:
+	N + K > D
+	Por lo tanto, o bien N > D/2 o K > D/2. Pero, gracias al ordenamiento inicial, sabemos que los valores más grandes se encuentran a la izquierda (lo ya "agregados"), entonces:
+	N > D/2
+	N <= D
+
+Por lo tanto, como una solución óptima también debe cumplir que
+	OPT <= D
+queda demostrado que
+	N > OPT/2
+	N <= OPT
+Por consigiente,
+	N < 2 * OPT
+
+	Se puede concluir que el algoritmo propuesto es una 2-aproximación.
+ 
+
+

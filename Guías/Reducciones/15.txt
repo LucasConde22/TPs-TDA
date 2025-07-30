@@ -1,0 +1,23 @@
+Problemas de decisión:
+Dominating Set: Dado un grafo no dirigido, determinar si es posible obtener un subconjunto de, a los sumo, K vértices tal que todos los vértices del grafo pertenezcan a dicho subconjunto o sean adyacentes a un vértice en él.
+Iluminar Submarinos: Dada una matriz donde en cada celda hay un submarino o no, determinar si es posible ubicar, a lo sumo, L faros, que iluminan en un radio de dos celdas, tal que todos los submarinos queden iluminados.
+
+Reducción de "Iluminar Submarinos" a "Dominating Set":
+	* Creo un grafo no dirigido con vértices que representan cada celda de la matriz, donde hay un submarino y donde no.
+	* Conecto todos los vértices pertenecientes a un submarino a los vértices pertenecientes a las celdas donde un faro podría iluminarlo.
+	* Conecto todos los vértices de celdas vacías (es decir, donde podría haber faros) entre si.
+	* Utilizo el algoritmo para determinar la existencia de un Dominating Set con el grafo recién creado y K = L.
+
+Demostración:
+	Hay Iluminar Submarinos <-> Hay Dominating Set
+
+Si hay Iluminar Submarinos -> hay Dominating Set:
+	Si hay, a lo sumo, L faros iluminando a todos los submarinos, en el grafo resultante de la reducción significa que cada unos de los vértices asociados a estos faros está conectado el vértice asociado al submarino en cuestión y a todos los dem´s vértices pertenecientes a celdas vacías (u otros faros). Por lo tanto, todo el grafo quedará dominado y se obtiene un Dominating Set de, a lo sumo, K vértices (K = L).
+
+Si hay Dominating Set -> hay Iluminar Submarinos:
+	Si hay un Dominating Set de, a lo sumo, K vértices podría darse el caso de que uno de los vértices asociados a un submarino quede dentro de la solución. Esto no es un problema, puesto que la dominancia podría ser cedida a cualquiera de sus adyacentes, donde no haya un submarino, y la solución seguiría siendo válida. Esto se debe a que los adyacentes "no submarino" de un vértice asociado a un submarinos son también adyacentes de cualquiera de sus adyacentes (ya que están todos conectados entre sí). Por lo tanto, seguiría habiendo un DS.
+	Por otro lado, la existencia de un DS implicaría la existencia de una forma de iluminar submarinos con, a lo sumo, L faros. Ya que, como mencioné anteriormente, si se traslada estos vértices a sus respectivas celdas en la matríz, los submarinos quedarán si o si cubiertos. La situación de que se elija un vértice que no ilumine ningún submarino es imposible (si K es mínimo), puesto que estos no están conectados a ningún submarino y, por ende, no quedarían todos dominados.
+
+De esta forma puedo concluir que Iluminar Submarinos <=p Dominating Set. Sin embargo, esto no me permite concluir que Iluminar Submarinos sea NP-Completo. Para esto debería realizar una reducción de un problema NP-Completo a Iluminar Submarinos (no al revés).
+
+
